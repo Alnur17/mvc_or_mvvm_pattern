@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mvc_or_mvvm_pattern/view/splash_view.dart';
+import 'package:get/get.dart';
+import 'package:mvc_or_mvvm_pattern/res/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      title: 'MVC/MVVM Pattern',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashView(),
+      //home: const SplashView(),
+      getPages: AppRoutes.appRoutes(),
     );
   }
 }
