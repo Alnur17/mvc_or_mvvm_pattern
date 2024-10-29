@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:mvc_or_mvvm_pattern/res/colors/app_color.dart';
 
 class Utils {
@@ -13,6 +14,21 @@ class Utils {
     Fluttertoast.showToast(
       msg: message,
       backgroundColor: AppColor.blackColor,
+      gravity: ToastGravity.BOTTOM,
     );
   }
+
+  static toastMessageCenter(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: AppColor.blackColor,
+      gravity: ToastGravity.CENTER,
+
+    );
+  }
+
+  static snackBar(String title, String message){
+    Get.snackbar(title, message);
+  }
+
 }
