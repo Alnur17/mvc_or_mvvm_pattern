@@ -6,7 +6,7 @@ import 'package:mvc_or_mvvm_pattern/data/app_exceptions.dart';
 import 'package:mvc_or_mvvm_pattern/data/network/base_api_services.dart';
 import 'package:http/http.dart' as http;
 
-class NetworkServices extends BaseApiServices {
+class NetworkApiServices extends BaseApiServices {
   @override
   Future getApi(String url) async {
     if (kDebugMode) {
