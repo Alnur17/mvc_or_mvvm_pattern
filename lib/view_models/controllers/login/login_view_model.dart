@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:mvc_or_mvvm_pattern/models/login/user_model.dart';
-import 'package:mvc_or_mvvm_pattern/repository/repository.dart';
 import 'package:mvc_or_mvvm_pattern/res/routes/routes_name.dart';
 import 'package:mvc_or_mvvm_pattern/utils/utils.dart';
 import 'package:mvc_or_mvvm_pattern/view_models/controllers/user_preference/user_preference_view_model.dart';
 
+import '../../../repository/login/login_repository.dart';
+
 class LoginViewModel extends GetxController {
   final UserPreference _userPreference = UserPreference();
 
-  final Repository _api = Repository();
+  final LoginRepository _api = LoginRepository();
 
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;

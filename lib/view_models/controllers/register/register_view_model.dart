@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mvc_or_mvvm_pattern/repository/register/register_repository.dart';
 
-import '../../../repository/repository.dart';
 import '../../../utils/utils.dart';
 
 class RegisterViewModel extends GetxController{
 
-  final Repository _api = Repository();
+  final RegisterRepository _api = RegisterRepository();
 
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
