@@ -3,27 +3,26 @@ import 'package:get/get.dart';
 import 'package:mvc_or_mvvm_pattern/res/colors/app_color.dart';
 import 'package:mvc_or_mvvm_pattern/res/components/custom_button.dart';
 import 'package:mvc_or_mvvm_pattern/utils/utils.dart';
-import 'package:mvc_or_mvvm_pattern/view_models/controllers/login/login_view_model.dart';
+import 'package:mvc_or_mvvm_pattern/view/login/login_view.dart';
 
-import '../register/register_view.dart';
-
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+import '../../view_models/controllers/register/register_view_model.dart';
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _loginViewModel = Get.put(LoginViewModel());
-  final GlobalKey<FormState> _formKey = GlobalKey();
+class _RegisterViewState extends State<RegisterView> {
+  final RegisterViewModel _registerViewModel = Get.put(RegisterViewModel());
+  final GlobalKey<FormState> _formKey= GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('login'.tr),
+        title: Text('register'.tr),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -34,15 +33,15 @@ class _LoginViewState extends State<LoginView> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TextFormField(
-                controller: _loginViewModel.emailController.value,
+                controller: _registerViewModel.emailController.value,
                 //focusNode: _loginViewModel.emailFocusNode.value,
                 decoration: InputDecoration(
                     hintText: 'email_hint'.tr,
-                    hintStyle: TextStyle(
-                        color: AppColor.secondaryTextColor.withOpacity(0.5)),
-                    border: const OutlineInputBorder()),
+                    hintStyle:  TextStyle(color: AppColor.secondaryTextColor.withOpacity(0.5)),
+                    border: const OutlineInputBorder()
+                ),
                 validator: (value) {
-                  if (value!.isEmpty) {
+                  if(value!.isEmpty){
                     return Utils.snackBar('Email', 'Please enter your email');
                   }
                   return null;
@@ -50,39 +49,36 @@ class _LoginViewState extends State<LoginView> {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _loginViewModel.passwordController.value,
+                controller: _registerViewModel.passwordController.value,
                 //focusNode: _loginViewModel.passwordFocusNode.value,
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: 'password_hint'.tr,
-                    hintStyle: TextStyle(
-                        color: AppColor.secondaryTextColor.withOpacity(0.5)),
-                    border: const OutlineInputBorder()),
+                    hintStyle:  TextStyle(color: AppColor.secondaryTextColor.withOpacity(0.5)),
+                    border: const OutlineInputBorder()
+                ),
                 validator: (value) {
-                  if (value!.isEmpty) {
+                  if(value!.isEmpty){
                     return Utils.toastMessage('Please enter your password');
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 24),
-              Obx(
-                () => CustomButton(
-                  title: 'login'.tr,
-                  loading: _loginViewModel.isLoading.value,
-                  onPress: () {
-                    if (_formKey.currentState!.validate()) {
-                      _loginViewModel.loginApi();
-                    }
-                  },
-                  width: double.infinity,
-                ),
+              CustomButton(
+                title: 'register'.tr,
+                onPress: () {
+                  if(_formKey.currentState!.validate()){
+                    _registerViewModel.registerApi();
+                  }
+                },
+                width: double.infinity,
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => RegisterView());
+                  Get.to(()=> const LoginView());
                 },
-                child: Text('register here'),
+                child: const Text('Login here'),
               ),
             ],
           ),

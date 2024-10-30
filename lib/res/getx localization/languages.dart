@@ -11,6 +11,7 @@ class Languages extends Translations{
       'general_exception' : 'We are unable to process your request. \nPlease try again.',
       'welcome_back': 'Welcome Back',
       'login': 'Login',
+      'register': 'Register',
     },
     'ur_PK' : {
       'email_hint' : 'ای میل درج کریں'
