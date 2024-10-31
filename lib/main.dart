@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'MVC/MVVM Pattern',
       translations: Languages(),
-      locale: const Locale('er', 'US'),
+      locale: const Locale('en', 'US'),
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

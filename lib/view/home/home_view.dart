@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mvc_or_mvvm_pattern/data/response/status.dart';
 import 'package:mvc_or_mvvm_pattern/res/routes/routes_name.dart';
+import 'package:mvc_or_mvvm_pattern/view/home/widgets/card_widget.dart';
+import 'package:mvc_or_mvvm_pattern/view/test/test.dart';
 
+import '../../view_models/controllers/home/home_view_model.dart';
 import '../../view_models/controllers/user_preference/user_preference_view_model.dart';
 
 class HomeView extends StatefulWidget {
@@ -13,6 +17,19 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final UserPreference _userPreference = UserPreference();
+  final HomeViewModelController _homeController =
+      Get.put(HomeViewModelController());
+
+  @override
+  void initState() {
+    super.initState();
+    _homeController.userListApi();
+  }
+  @override
+  void dispose() {
+    Get.delete<HomeViewModelController>();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +37,39 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Home'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _userPreference.clearUser().then(
-            (value) {
-              Get.toNamed(RoutesName.loginView);
+        actions: [
+          IconButton(
+            onPressed: () {
+              _userPreference.clearUser().then(
+                (value) {
+                  Get.offAllNamed(RoutesName.loginView);
+                },
+              );
             },
-          );
-        },
-        child: const Text('LogOut'),
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
+      body: Obx(
+        () {
+          switch (_homeController.rxRequestStatus.value) {
+            case Status.loading:
+              return const Center(child: CircularProgressIndicator());
+            case Status.error:
+              return Text('something_wrong'.tr);
+            case Status.completed:
+              return ListView.builder(
+                itemCount: _homeController.userList.value.data!.length,
+                itemBuilder: (context, index) {
+                  return CardWidget(index: index,);
+                },
+              );
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Get.to(()=>  const FadedButton());
+      }),
     );
   }
 }

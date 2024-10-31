@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mvc_or_mvvm_pattern/res/colors/app_color.dart';
-import 'package:mvc_or_mvvm_pattern/res/components/custom_button.dart';
 import 'package:mvc_or_mvvm_pattern/utils/utils.dart';
+import 'package:mvc_or_mvvm_pattern/view/login/widgets/login_button_widget.dart';
 import 'package:mvc_or_mvvm_pattern/view_models/controllers/login/login_view_model.dart';
 
 import '../register/register_view.dart';
@@ -66,23 +66,12 @@ class _LoginViewState extends State<LoginView> {
                 },
               ),
               const SizedBox(height: 24),
-              Obx(
-                () => CustomButton(
-                  title: 'login'.tr,
-                  loading: _loginViewModel.isLoading.value,
-                  onPress: () {
-                    if (_formKey.currentState!.validate()) {
-                      _loginViewModel.loginApi();
-                    }
-                  },
-                  width: double.infinity,
-                ),
-              ),
+              LoginButtonWidget(formKey: _formKey,),
               TextButton(
                 onPressed: () {
-                  Get.to(() => RegisterView());
+                  Get.to(() => const RegisterView());
                 },
-                child: Text('register here'),
+                child: Text('register'.tr),
               ),
             ],
           ),

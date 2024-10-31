@@ -6,6 +6,7 @@ import 'package:mvc_or_mvvm_pattern/utils/utils.dart';
 import 'package:mvc_or_mvvm_pattern/view/login/login_view.dart';
 
 import '../../view_models/controllers/register/register_view_model.dart';
+
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
@@ -15,7 +16,7 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final RegisterViewModel _registerViewModel = Get.put(RegisterViewModel());
-  final GlobalKey<FormState> _formKey= GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +38,11 @@ class _RegisterViewState extends State<RegisterView> {
                 //focusNode: _loginViewModel.emailFocusNode.value,
                 decoration: InputDecoration(
                     hintText: 'email_hint'.tr,
-                    hintStyle:  TextStyle(color: AppColor.secondaryTextColor.withOpacity(0.5)),
-                    border: const OutlineInputBorder()
-                ),
+                    hintStyle: TextStyle(
+                        color: AppColor.secondaryTextColor.withOpacity(0.5)),
+                    border: const OutlineInputBorder()),
                 validator: (value) {
-                  if(value!.isEmpty){
+                  if (value!.isEmpty) {
                     return Utils.snackBar('Email', 'Please enter your email');
                   }
                   return null;
@@ -54,11 +55,11 @@ class _RegisterViewState extends State<RegisterView> {
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: 'password_hint'.tr,
-                    hintStyle:  TextStyle(color: AppColor.secondaryTextColor.withOpacity(0.5)),
-                    border: const OutlineInputBorder()
-                ),
+                    hintStyle: TextStyle(
+                        color: AppColor.secondaryTextColor.withOpacity(0.5)),
+                    border: const OutlineInputBorder()),
                 validator: (value) {
-                  if(value!.isEmpty){
+                  if (value!.isEmpty) {
                     return Utils.toastMessage('Please enter your password');
                   }
                   return null;
@@ -66,17 +67,18 @@ class _RegisterViewState extends State<RegisterView> {
               ),
               const SizedBox(height: 24),
               CustomButton(
-                title: 'register'.tr,
-                onPress: () {
-                  if(_formKey.currentState!.validate()){
-                    _registerViewModel.registerApi();
-                  }
-                },
-                width: double.infinity,
-              ),
+                  title: 'register'.tr,
+                  onPress: () {
+                    if (_formKey.currentState!.validate()) {
+                      _registerViewModel.registerApi();
+                    }
+                  },
+                  // width: double.infinity,
+                ),
+
               TextButton(
                 onPressed: () {
-                  Get.to(()=> const LoginView());
+                  Get.to(() => const LoginView());
                 },
                 child: const Text('Login here'),
               ),
