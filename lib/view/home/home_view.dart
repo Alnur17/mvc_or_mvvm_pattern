@@ -25,6 +25,7 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     _homeController.userListApi();
   }
+
   @override
   void dispose() {
     Get.delete<HomeViewModelController>();
@@ -61,15 +62,20 @@ class _HomeViewState extends State<HomeView> {
               return ListView.builder(
                 itemCount: _homeController.userList.value.data!.length,
                 itemBuilder: (context, index) {
-                  return CardWidget(index: index,);
+                  return CardWidget(
+                    index: index,
+                  );
                 },
               );
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        Get.to(()=>  const FadedButton());
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => const FadedButton());
+        },
+        child: const Icon(Icons.arrow_forward_rounded),
+      ),
     );
   }
 }

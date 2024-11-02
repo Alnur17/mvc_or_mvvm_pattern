@@ -24,7 +24,7 @@ class LoginViewModel extends GetxController {
     isLoading.value = true;
 
     Map<String, dynamic> data = {
-      'email': emailController.value.text,
+      'username': emailController.value.text,
       'password': passwordController.value.text,
     };
 

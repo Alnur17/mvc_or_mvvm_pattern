@@ -29,7 +29,7 @@ class _FadedButtonState extends State<FadedButton> {
     double scrollPosition = _scrollController.position.pixels;
 
     // Start of the icons section
-    double iconStartPosition = _scrollController.position.maxScrollExtent - 200;
+    double iconStartPosition = _scrollController.position.maxScrollExtent - 50;
 
     // End of the icons section (adjust based on your content)
     double iconEndPosition = _scrollController.position.maxScrollExtent;
@@ -45,7 +45,7 @@ class _FadedButtonState extends State<FadedButton> {
     // Update button opacity and position based on icon visibility percentage
     setState(() {
       _fabOpacity = 1.0 - iconVisibilityPercentage;
-      _fabBottomPosition = 16.0 + (64.0 * iconVisibilityPercentage); // Moves up as it fades
+      _fabBottomPosition = 16.0 + (50.0 * iconVisibilityPercentage); // Moves up as it fades
     });
   }
 
@@ -62,7 +62,7 @@ class _FadedButtonState extends State<FadedButton> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 30,
+                  itemCount: 100,
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: const Icon(Icons.list),
@@ -71,9 +71,6 @@ class _FadedButtonState extends State<FadedButton> {
                   },
                 ),
                 // Icons to show at the end of the list
-                const Icon(Icons.stadium, size: 50),
-                const Icon(Icons.stadium, size: 50),
-                const Icon(Icons.stadium, size: 50),
                 const Icon(Icons.stadium, size: 50),
               ],
             ),
